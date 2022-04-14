@@ -27,4 +27,3 @@ int largest_number(int a, int b, int c)
 
 	return (largest);
 }
-© 2022 GitHub, Inc.
