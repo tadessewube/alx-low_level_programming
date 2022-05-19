@@ -1,48 +1,47 @@
 #include "lists.h"
 #include <stdlib.h>
+#include <stddef.h>
 #include <string.h>
-#include <stdio.h>
 
-
-/**
- * _strlen - finds the length of a string
- * @str: string to find the length of
- *
- * Return: length of string
- */
-unsigned int _strlen(char *str)
-{
-	unsigned int i;
-
-	for (i = 0; str[i]; i++)
-		;
-	return (i);
-}
+int _strlen(const char *s);
 
 /**
- * add_node - adds a node to the beginning of a linked list
- * @head: double pointer to a lined list
- * @str: string to add to the new node
+ * add_node - put a new node after head
+ * @head: double pointer to  head
+ * @str: string
  *
- * Return: pointer to the new node
+ * Return: adress of new node
  */
 list_t *add_node(list_t **head, const char *str)
 {
-	list_t *new;
+	list_t *n_node;
 
-	if (str == NULL)
+	if (head == NULL)
 		return (NULL);
-	new = malloc(sizeof(list_t));
-	if (new == NULL)
+
+	n_node = malloc(sizeof(list_t));
+	if (n_node == NULL)
 		return (NULL);
-	new->str = strdup(str);
-	if (new->str == NULL)
-	{
-		free(new);
-		return (NULL);
-	}
-	new->len = _strlen(new->str);
-	new->next = *head;
-	*head = new;
-	return (new);
+
+	n_node->str = strdup(str), n_node->len = _strlen(str);
+
+	n_node->next = *head, *head = n_node;
+
+	return (n_node);
+}
+
+
+/**
+ * _strlen - show the lenght of a string
+ * @s: pointe to  pass the array
+ *
+ * Return: none
+ */
+int _strlen(const char *s)
+{
+	int i = 0;
+
+	while (s[i])
+		++i;
+	return (i);
 }
